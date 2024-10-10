@@ -8,7 +8,7 @@ class Categoria(models.Model):
 		return self.nombre
 
 class Noticia(models.Model):
-
+	usuario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
 	titulo = models.CharField(max_length = 150)
 	cuerpo = models.TextField()
 	imagen = models.ImageField(upload_to = 'noticias')

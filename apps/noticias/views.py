@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
+from .forms import NoticiaForm
+
 from .models import Noticia, Categoria, Comentario
 
 from django.urls import reverse_lazy
@@ -24,6 +26,24 @@ def Listar_Noticias(request):
 	contexto['categorias'] = cat
 
 	return render(request, 'noticias/listar.html', contexto)
+
+@login_required
+def Crear_Noticia(request):
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES)
+        if form.is_valid():
+            noticia = form.save(commit=False)
+            noticia.usuario = request.user
+            noticia.save()
+            messages.success(request, "Noticia creada correctamente.")
+            return redirect('noticias:listar')
+        else:
+            print(form.errors)
+            messages.error(request, "Error al crear la noticia. Revisa el formulario.")
+    else:
+        form = NoticiaForm()
+
+    return render(request, 'noticias/crear.html', {'form': form})
 
 def Detalle_Noticias(request, pk):
 	contexto = {}
@@ -50,20 +70,16 @@ def Comentar_Noticia(request):
 
 @login_required
 def Eliminar_Comentario(request, pk):
-    # Obtener el comentario o lanzar un error 404 si no existe
     comentario = get_object_or_404(Comentario, pk=pk, usuario=request.user)
-    
-    # Guardar el ID de la noticia antes de eliminar el comentario
+
     noticia_id = comentario.noticia.pk
 
-    # Asegurarse de que solo el autor pueda eliminar su comentario
     if comentario.usuario == request.user:
         comentario.delete()
         messages.success(request, "Comentario eliminado correctamente.")
     else:
         messages.error(request, "No tienes permiso para eliminar este comentario.")
 
-    # Redirigir a la página de detalles de la noticia
     return redirect(reverse_lazy('noticias:detalle', kwargs={'pk': noticia_id}))
 
 #{'nombre':'name', 'apellido':'last name', 'edad':23}
