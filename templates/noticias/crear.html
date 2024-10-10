@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Registro{% endblock %}
+{% block contenido %}
+  <h2>Crear Nueva Noticia</h2>
+
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Crear Noticia</button>
+  </form>
+{% endblock contenido %}

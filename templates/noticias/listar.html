@@ -11,7 +11,7 @@
 		{% for cat in categorias %}
 			<a href="?id={{cat.pk}}">{{cat.nombre}}</a>
 		{% endfor %}
-
+		<a href="{% url 'noticias:crear_noticia' %}">Crear Noticia</a>
 	</div>
 
 	<h1>ACA VOY A LISTAR LAS NOTICIAS</h1>
