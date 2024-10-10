@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
@@ -6,7 +8,6 @@ from .models import Noticia, Categoria, Comentario
 
 from django.urls import reverse_lazy
 
-@login_required
 def Listar_Noticias(request):
 	contexto = {}
 
@@ -24,7 +25,6 @@ def Listar_Noticias(request):
 
 	return render(request, 'noticias/listar.html', contexto)
 
-@login_required
 def Detalle_Noticias(request, pk):
 	contexto = {}
 
@@ -47,6 +47,24 @@ def Comentar_Noticia(request):
 	coment = Comentario.objects.create(usuario = usu, noticia = noticia, texto = com)
 
 	return redirect(reverse_lazy('noticias:detalle', kwargs={'pk': noti}))
+
+@login_required
+def Eliminar_Comentario(request, pk):
+    # Obtener el comentario o lanzar un error 404 si no existe
+    comentario = get_object_or_404(Comentario, pk=pk, usuario=request.user)
+    
+    # Guardar el ID de la noticia antes de eliminar el comentario
+    noticia_id = comentario.noticia.pk
+
+    # Asegurarse de que solo el autor pueda eliminar su comentario
+    if comentario.usuario == request.user:
+        comentario.delete()
+        messages.success(request, "Comentario eliminado correctamente.")
+    else:
+        messages.error(request, "No tienes permiso para eliminar este comentario.")
+
+    # Redirigir a la página de detalles de la noticia
+    return redirect(reverse_lazy('noticias:detalle', kwargs={'pk': noticia_id}))
 
 #{'nombre':'name', 'apellido':'last name', 'edad':23}
 #EN EL TEMPLATE SE RECIBE UNA VARIABLE SEPARADA POR CADA CLAVE VALOR
