@@ -1,17 +1,47 @@
+.contenedor {
+	background-color: rgb(220, 200, 200);
+  }
 
-.contenedor{
-	background-color: aqua;
-}
-
-.centrar{
+.centrar {
 	text-align: center;
 }
 
-.bloque{
-	text-align: center;
+.bloque {
 	padding: 100px;
 }
 
-.submenu{
-	font-size: 18px	;
+.submenu {
+	font-size: 18px;
+}
+
+h2{
+	font-size: 15;
+}
+
+img {
+	margin: 0 15%;
+	border-radius: 8px;
+	width: 200px;
+	height: 200px;
+}
+
+.card {
+	margin: 0 auto;
+	background-color: #faebd7;
+	width: 300px;
+	padding: 16px;
+	border: 1px solid #000;
+	border-radius: 8px;
+}
+
+p{
+	font-family: "Poppins", sans-serif;
+	justify-content: flex-start;
+}
+
+span{
+	font-weight: bold;
+	background-color: rgb(220, 200, 200);
+	padding: 4px;
+	border-radius: 6px;
 }
