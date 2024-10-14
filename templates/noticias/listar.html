@@ -4,16 +4,15 @@
 {% block titulo %}NOTICIAS{% endblock titulo %}
 
 {% block contenido %}
-	<div class="submenu">
+<div class="submenu">
+    <a href="{% url 'noticias:listar' %}">TODAS</a>
+	{% for cat in categorias %}
+		<a href="?id={{cat.pk}}">{{cat.nombre}}</a>
+	{% endfor %}
+	<a href="{% url 'noticias:crear_noticia' %}">Crear Noticia</a>
+</div>
 
-		<a href="{% url 'noticias:listar' %}">TODAS</a>
-		{% for cat in categorias %}
-			<a href="?id={{cat.pk}}">{{cat.nombre}}</a>
-		{% endfor %}
-		<a href="{% url 'noticias:crear_noticia' %}">Crear Noticia</a>
-	</div>
-
-	<h1>ACA VOY A LISTAR LAS NOTICIAS</h1>
+<h1>LAS NOTICIAS</h1>
 
 <div class="card-container">
 	{% for noti in noticias %}
@@ -33,6 +32,12 @@
             <form action="{% url 'noticias:eliminar' noti.pk %}" method="post" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta noticia?')">X</button>
+            </form>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <form action="{% url 'noticias:denunciar' noti.pk %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas denunciar esta noticia?')">Denunciar</button>
             </form>
         {% endif %}
     </div>

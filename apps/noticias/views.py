@@ -6,28 +6,34 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.exceptions import PermissionDenied
 
-from .forms import NoticiaForm
+from .forms import NoticiaForm, DenunciaForm
 
-from .models import Noticia, Categoria, Comentario
+from .models import Noticia, Categoria, Comentario, Denuncia
 
 from django.urls import reverse_lazy
 
 def Listar_Noticias(request):
-	contexto = {}
+    # Obtener el id de la categoría del GET
+    id_categoria = request.GET.get('id')
 
-	id_categoria = request.GET.get('id',None)
+    # Filtrar noticias por categoría si se proporciona, de lo contrario, obtener todas
+    noticias = Noticia.objects.filter(categoria_noticia=id_categoria) if id_categoria else Noticia.objects.all()
 
-	if id_categoria:
-		n = Noticia.objects.filter(categoria_noticia = id_categoria)
-	else:
-		n = Noticia.objects.all() #RETORNA UNA LISTA DE OBJETOS
+    # Obtener todas las categorías
+    categorias = Categoria.objects.all().order_by('nombre')
 
-	contexto['noticias'] = n
+    # Crear un diccionario de denuncias para el usuario actual
+    if request.user.is_authenticated:
+        denunciadas = {noticia.pk: Denuncia.objects.filter(usuario=request.user, noticia=noticia).exists() for noticia in noticias}
 
-	cat = Categoria.objects.all().order_by('nombre')
-	contexto['categorias'] = cat
+    # Pasar el contexto a la plantilla
+    contexto = {
+        'noticias': noticias,
+        'categorias': categorias,
+        'denunciadas': denunciadas,
+    }
 
-	return render(request, 'noticias/listar.html', contexto)
+    return render(request, 'noticias/listar.html', contexto)
 
 @login_required
 def Crear_Noticia(request):
@@ -56,6 +62,25 @@ def Eliminar_Noticia(request, pk):
         return redirect('noticias:listar')
     else:
         raise PermissionDenied("No tienes permiso para eliminar esta noticia.")
+
+@login_required
+def Denunciar_Noticia(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+
+    if request.method == 'POST':
+        form = DenunciaForm(request.POST)
+        if form.is_valid():
+            denuncia = form.save(commit=False)
+            denuncia.usuario = request.user
+            denuncia.noticia = noticia
+            denuncia.save()
+            return redirect('noticias:listar')
+
+    else:
+        form = DenunciaForm()
+
+    return render(request, 'noticias/denuncia.html', {'form': form, 'noticia': noticia})
+
 
 def Detalle_Noticias(request, pk):
 	contexto = {}
