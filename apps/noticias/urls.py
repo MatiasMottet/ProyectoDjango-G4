@@ -11,6 +11,8 @@ urlpatterns = [
 
 	path('Eliminar/<int:pk>/', views.Eliminar_Noticia, name='eliminar'),
 
+	path('Denunciar/<int:pk>/', views.Denunciar_Noticia, name='denunciar'),
+
 	path('Detalle/<int:pk>', views.Detalle_Noticias, name = 'detalle'),
 
 	path('Comentario/Agregar', views.Comentar_Noticia, name = 'comentar'),

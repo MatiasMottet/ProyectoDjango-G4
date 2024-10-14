@@ -26,3 +26,12 @@ class Comentario(models.Model):
 
 	def __str__(self):
 		return f"{noticia}->{texto}"
+
+class Denuncia(models.Model):
+	usuario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+	noticia = models.ForeignKey(Noticia, on_delete = models.CASCADE)
+	motivo = models.TextField()
+	fecha = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return f"Denuncia por {self.usuario.username} sobre {self.noticia.titulo}"
