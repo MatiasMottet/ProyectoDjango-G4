@@ -3,7 +3,6 @@
 
 {% block titulo %}NOTICIAS{% endblock titulo %}
 
-
 {% block contenido %}
 	<div class="submenu">
 
@@ -16,21 +15,29 @@
 
 	<h1>ACA VOY A LISTAR LAS NOTICIAS</h1>
 
-	{% for noti in noticias %}
 <div class="card-container">
+	{% for noti in noticias %}
     <div class="card">
-        <img src="{{noti.imagen.url}}" width="100" height="100" />
-        {% comment %} <img src="{{noti.imagen.url}}" width="100" height="100" /> {% endcomment %}
+        <img src="{{noti.imagen.url}}" />
         <p>
             <a href="{% url 'noticias:detalle' noti.pk %}"><span>TITULO:</span> {{noti.titulo}}</a>
         </p>
         <p><span>FECHA:</span> {{noti.fecha}}</p>
         <p><span>CATEGORIA:</span> {{noti.categoria_noticia}}</p>
         <p><span>CUERPO:</span> {{noti.cuerpo}}</p>
-    </div>
-</div>
-<br><br>
+        <p>
+            <a href="{% url 'usuarios:perfil' noti.usuario.pk %}"><span>AUTOR:</span> {{noti.usuario}}</a>
+        </p>
 
-	{% endfor %}
+        {% if user.is_authenticated and user == noti.usuario %}
+            <form action="{% url 'noticias:eliminar' noti.pk %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta noticia?')">X</button>
+            </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock contenido %}
 
