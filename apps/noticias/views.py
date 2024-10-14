@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
+from django.core.exceptions import PermissionDenied
+
 from .forms import NoticiaForm
 
 from .models import Noticia, Categoria, Comentario
@@ -44,6 +46,16 @@ def Crear_Noticia(request):
         form = NoticiaForm()
 
     return render(request, 'noticias/crear.html', {'form': form})
+
+@login_required
+def Eliminar_Noticia(request, pk):
+    n = get_object_or_404(Noticia, pk=pk)
+
+    if request.user == n.usuario or request.user.is_staff:
+        n.delete()
+        return redirect('noticias:listar')
+    else:
+        raise PermissionDenied("No tienes permiso para eliminar esta noticia.")
 
 def Detalle_Noticias(request, pk):
 	contexto = {}

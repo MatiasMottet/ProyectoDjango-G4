@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Perfil de {{ user.username }}{% endblock %}
+{% block contenido %}
+
+<div class="perfil-container">
+    <h1>Perfil de {{ user.username }}</h1>
+    <div class="perfil-info">
+        <div class="campo">
+            <strong>Nombre:</strong> {{ user.first_name }}
+        </div>
+        <div class="campo">
+            <strong>Apellido:</strong> {{ user.last_name }}
+        </div>
+        <div class="campo">
+            <strong>Nombre de Usuario:</strong> {{ user.username }}
+        </div>
+        <div class="campo">
+            <strong>Email:</strong> {{ user.email }}
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
