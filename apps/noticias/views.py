@@ -22,15 +22,10 @@ def Listar_Noticias(request):
     # Obtener todas las categorías
     categorias = Categoria.objects.all().order_by('nombre')
 
-    # Crear un diccionario de denuncias para el usuario actual
-    if request.user.is_authenticated:
-        denunciadas = {noticia.pk: Denuncia.objects.filter(usuario=request.user, noticia=noticia).exists() for noticia in noticias}
-
     # Pasar el contexto a la plantilla
     contexto = {
         'noticias': noticias,
         'categorias': categorias,
-        'denunciadas': denunciadas,
     }
 
     return render(request, 'noticias/listar.html', contexto)

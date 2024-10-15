@@ -5,14 +5,16 @@
 
 {% block contenido %}
 <div class="submenu">
-    <a href="{% url 'noticias:listar' %}">TODAS</a>
-	{% for cat in categorias %}
+    <h1>NUESTRAS <span>NOTICIAS</span></h1>
+    <div class="navbar">
+        <a href="{% url 'noticias:listar' %}">TODAS</a>
+        {% for cat in categorias %}
 		<a href="?id={{cat.pk}}">{{cat.nombre}}</a>
-	{% endfor %}
-	<a href="{% url 'noticias:crear_noticia' %}">Crear Noticia</a>
+        {% endfor %}
+        <a href="{% url 'noticias:crear_noticia' %}">Crear Noticia</a>
+    </div>
 </div>
 
-<h1>LAS NOTICIAS</h1>
 
 <div class="card-container">
 	{% for noti in noticias %}

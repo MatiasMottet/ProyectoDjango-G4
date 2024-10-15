@@ -5,34 +5,31 @@
 	<title>Blogs {% block titulo %}{% endblock titulo %}</title>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/submenu.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
-	<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/perfil.css' %}">
 </head>
 
-
-<body class="contenedor">
-
-	<div class="centrar">
-		<a href="{% url 'home' %}">BLOGS.</a>
+<header class="header">
+	<a href="{% url 'noticias:listar' %}" class="logo">Blogs<span>.</span></a>
+	<nav class="navbar">
 		<a href="{% url 'nosotros' %}">NOSOTROS</a>
 		<a href="{% url 'noticias:listar' %}">NOTICIAS</a>
-
 		{% if user.is_authenticated %}
-			<strong>Hola {{ user.username }}</strong>
+			<strong style="margin-right: 0;">HOLA {{ user.username|upper }}</strong>
 			<a href="{% url 'logout' %}">LOGOUT</a>
 		{% else %}
 			<a href="{% url 'login' %}">LOGIN</a>
-			<a href="{% url 'usuarios:registro' %}">Registrar</a>
+			<a href="{% url 'usuarios:registro' %}">REGISTER</a>
 		{% endif %}
-		
-		
+	</nav>
+</header>
 
-	</div>
-
-	<div class="bloque">
+<body class="section">
 	{% block contenido %}
-	
+
 	{% endblock contenido %}
-	</div>
 </body>
 </html>

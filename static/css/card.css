@@ -9,7 +9,7 @@
     position: relative;
     text-align: center;
 	margin: 0 auto;
-	background-color: #faebd7;
+	background-color: var(--text-color);
 	width: 300px;
 	padding: 16px;
 	border: 1px solid #000;
@@ -36,11 +36,4 @@ img {
 p{
 	font-family: "Poppins", sans-serif;
 	justify-content: flex-start;
-}
-
-span{
-	font-weight: bold;
-	background-color: rgb(220, 200, 200);
-	padding: 4px;
-	border-radius: 6px;
 }
