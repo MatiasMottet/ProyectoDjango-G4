@@ -21,13 +21,15 @@
     <div class="card">
         <img src="{{noti.imagen.url}}" />
         <p>
-            <a href="{% url 'noticias:detalle' noti.pk %}"><span>TITULO:</span> {{noti.titulo}}</a>
-        </p>
-        <p><span>FECHA:</span> {{noti.fecha}}</p>
-        <p><span>CATEGORIA:</span> {{noti.categoria_noticia}}</p>
-        <p><span>CUERPO:</span> {{noti.cuerpo}}</p>
+        <a href="{% url 'noticias:detalle' noti.pk %}">
+           TITULO: {{noti.titulo}}
+        </a>
+    </p>
+        <p>FECHA: {{noti.fecha}}</p>
+        <p>CATEGORIA: {{noti.categoria_noticia}}</p>
+        <p>CUERPO:{{noti.cuerpo}}</p>
         <p>
-            <a href="{% url 'usuarios:perfil' noti.usuario.pk %}"><span>AUTOR:</span> {{noti.usuario}}</a>
+            <a href="{% url 'usuarios:perfil' noti.usuario.pk %}">AUTOR: {{noti.usuario}}</a>
         </p>
 
         {% if user.is_authenticated and user == noti.usuario %}
