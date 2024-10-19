@@ -99,10 +99,3 @@ p{
 	font-family: "Poppins", sans-serif;
 	justify-content: flex-start;
 }
-
-span{
-	font-weight: bold;
-	background-color: rgb(220, 200, 200);
-	padding: 4px;
-	border-radius: 6px;
-}

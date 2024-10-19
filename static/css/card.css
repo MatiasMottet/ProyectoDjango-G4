@@ -6,8 +6,6 @@
 }
 
 .card {
-    position: relative;
-    text-align: center;
 	margin: 0 auto;
 	background-color: var(--text-color);
 	width: 300px;
@@ -35,8 +33,10 @@ img {
 }
 
 .card p {
+    display:flex;
 	font-family: "Poppins", sans-serif;
-	justify-content: flex-start;
-  color: #000;
-  margin-bottom: 20px;
+    align-items: flex-start;
+    text-align: left;
+    color: #000;
+    margin-bottom: 20px;
 }
