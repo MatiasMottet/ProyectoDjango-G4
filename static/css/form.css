@@ -34,3 +34,6 @@ select {
     background-color: var(--text-color);
     color: var(--main-color);
 }
+.width-50 {
+    width: 50%;
+}

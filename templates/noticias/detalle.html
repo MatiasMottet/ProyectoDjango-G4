@@ -5,34 +5,42 @@
 
 
 {% block contenido %}
-	<h1>ACA VOY A DETALLAR UNA NOTICIA</h1>
-		<img src="{{noticia.imagen.url}}" width="500" height="500">
-		
-		<p>TITULO: {{noticia.titulo}}</p>
-		
-		<p>FECHA: {{noticia.fecha}}</p>
-		<p>CATEGORIA: {{noticia.categoria_noticia}}</p>
-		<p>CUERPO: {{noticia.cuerpo}}</p>
-		<br><br>
-		<br>
-		<form method="POST" action="{% url 'noticias:comentar' %}">{% csrf_token %}
-			<textarea name="comentario" maxlength="1500"> </textarea>
-			<input type="text" name="id_noticia" value="{{noticia.pk}}" hidden=""> 
-			<input type="submit" value="GUARDAR">
-		</form>
-		<br><br><br>
-		<h3>COMENTARIOS</h3>
+<div class="detalle-container">
+	<div class="submenu width-50">
+		<h1 style="display: block;">Detalle de {{noticia.titulo}}</h1>
+		<div class="form">
+			<img src="{{noticia.imagen.url}}" width="500" height="500">
+			<p>TITULO: {{noticia.titulo}}</p>
+			<p>FECHA: {{noticia.fecha}}</p>
+			<p>CATEGORIA: {{noticia.categoria_noticia}}</p>
+			<p>CUERPO: {{noticia.cuerpo}}</p>
+		</div>
+		<div class="form">
+			<h4>COMENTAR</h4>
+			<form method="POST" action="{% url 'noticias:comentar' %}">{% csrf_token %}
+				<textarea name="comentario" maxlength="1500"> </textarea>
+				<input type="text" name="id_noticia" value="{{noticia.pk}}" hidden="">
+				<button type="submit" value="GUARDAR">ENVIAR</button>
+			</form>
+		</div>
+	</div>
+	<div class="submenu width-50">
+		<h1>Comentarios</h1>
 		{% for com in comentarios %}
-		{% if user == com.usuario %}
+		<div class="form">
+			<p>{{com.texto}}</p>
+			<strong>FECHA:{{com.fecha}}</strong><br>
+			<strong>USUARIO:{{com.usuario}}</strong><br>
+			{% if user == com.usuario %}
 			<form method="POST" action="{% url 'noticias:eliminar_comentario' com.pk%}" >
-                {% csrf_token %}
-                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este comentario?');">Eliminar</button>
-            </form>
-		{% endif %}
-		<strong>FECHA:{{com.fecha}}</strong><br>
-		<strong>USUARIO:{{com.usuario}}</strong><br>
-		<p>{{com.texto}}</p>
+				{% csrf_token %}
+				<button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este comentario?');">Eliminar</button>
+			</form>
+			{% endif %}
+		</div>
 		{% endfor %}
-		<a href="{% url 'noticias:listar' %}" class="link">VOLVER</a>
+		<a href="{% url 'noticias:listar' %}" class="boton">VOLVER</a>
+	</div>
+</div>
 {% endblock contenido %}
 
