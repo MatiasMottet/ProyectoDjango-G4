@@ -12,10 +12,10 @@
 }
 
 :root {
-    --bg-color: #081b29;
-    --second-bg-color: #112e42;
-    --text-color: #FFE1FF;
-    --main-color: #7E60BF;
+    --bg-color: #125381;
+    --second-bg-color: #59abe3;
+    --text-color: #FFE1FF; 
+    --main-color: #0c0b0d;
 }
 
 html {
@@ -30,6 +30,20 @@ body {
 
 a {
 	text-decoration: none;
+}
+.link {
+    color: #000;
+    padding: 4px;
+
+}
+.link:visited {
+    color: white;
+}
+.link:hover{
+    background-color: #faebd7;
+    padding: 4px;
+    border-radius: 8px;
+    color: #000;
 }
 
 p {
@@ -46,3 +60,49 @@ strong {
 }
 
 
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px;
+}
+
+.card {
+    position: relative;
+    text-align: center;
+	margin: 0 auto;
+	background-color: #faebd7;
+	width: 300px;
+	padding: 16px;
+	border: 1px solid #000;
+	border-radius: 8px;
+}
+
+.delete-button {
+    background-color: rgb(238, 51, 51);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+img {
+	margin: 0 15%;
+	border-radius: 8px;
+	width: 200px;
+	height: 200px;
+}
+
+p{
+	font-family: "Poppins", sans-serif;
+	justify-content: flex-start;
+}
+
+span{
+	font-weight: bold;
+	background-color: rgb(220, 200, 200);
+	padding: 4px;
+	border-radius: 6px;
+}
