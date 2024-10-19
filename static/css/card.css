@@ -14,10 +14,11 @@
 	padding: 16px;
 	border: 1px solid #000;
 	border-radius: 8px;
+    
 }
 
 .delete-button {
-    background-color: red;
+    background-color: rgb(232, 53, 53);
     color: white;
     border: none;
     cursor: pointer;
@@ -33,12 +34,9 @@ img {
 	height: 200px;
 }
 
-p{
+.card p {
 	font-family: "Poppins", sans-serif;
 	justify-content: flex-start;
-    color: #a37ccf;
-}
-
-span{
-    color: #8433e0;
+  color: #000;
+  margin-bottom: 20px;
 }
