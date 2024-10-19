@@ -12,10 +12,11 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/perfil.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/detalle.css' %}">
 </head>
 
 <header class="header">
-	<a href="{% url 'noticias:listar' %}" class="logo">IABlogs.</a>
+	<a href="{% url 'noticias:listar' %}" class="logo">IABlogs<span>.</span></a>
 	<nav class="navbar">
 		<a href="{% url 'nosotros' %}">NOSOTROS</a>
 		<a href="{% url 'noticias:listar' %}">NOTICIAS</a>

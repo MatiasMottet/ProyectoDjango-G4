@@ -14,7 +14,7 @@
 :root {
     --bg-color: #125381;
     --second-bg-color: #59abe3;
-    --text-color: #FFE1FF; 
+    --text-color: #FFE1FF;
     --main-color: #0c0b0d;
 }
 
@@ -34,7 +34,6 @@ a {
 .link {
     color: #000;
     padding: 4px;
-
 }
 .link:visited {
     color: white;
