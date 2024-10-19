@@ -36,4 +36,9 @@ img {
 p{
 	font-family: "Poppins", sans-serif;
 	justify-content: flex-start;
+    color: #a37ccf;
+}
+
+span{
+    color: #8433e0;
 }

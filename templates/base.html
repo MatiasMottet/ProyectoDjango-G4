@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Blogs {% block titulo %}{% endblock titulo %}</title>
+	<title>IABlogs |  {% block titulo %}{% endblock titulo %}</title>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
@@ -13,7 +13,7 @@
 </head>
 
 <header class="header">
-	<a href="{% url 'noticias:listar' %}" class="logo">Blogs<span>.</span></a>
+	<a href="{% url 'noticias:listar' %}" class="logo">IABlogs<span>.</span></a>
 	<nav class="navbar">
 		<a href="{% url 'nosotros' %}">NOSOTROS</a>
 		<a href="{% url 'noticias:listar' %}">NOTICIAS</a>
