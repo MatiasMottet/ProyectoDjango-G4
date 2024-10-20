@@ -3,22 +3,14 @@
 
 {% block title %}Perfil de {{ user.username }}{% endblock %}
 {% block contenido %}
-
-<div class="perfil-container">
-    <h1>Perfil de {{ user.username }}</h1>
-    <div class="perfil-info">
-        <div class="campo">
-            <strong>Nombre:</strong> {{ user.first_name }}
-        </div>
-        <div class="campo">
-            <strong>Apellido:</strong> {{ user.last_name }}
-        </div>
-        <div class="campo">
-            <strong>Nombre de Usuario:</strong> {{ user.username }}
-        </div>
-        <div class="campo">
-            <strong>Email:</strong> {{ user.email }}
-        </div>
+<div class="submenu">
+    <div class="form">
+    <h1>Perfil de <span>{{ user.username }}</span></h1>
+        <p><span>Nombre:</span> {{ user.first_name }}</p>
+        <p><span>Apellido:</span> {{ user.last_name }}</p>
+        <p><span>Nombre de Usuario:</span> {{ user.username }}</p>
+        <p><span>Email:</span> {{ user.email }}</p>
     </div>
+    <a href="{% url 'noticias:listar' %}" class="boton">VOLVER</a>
 </div>
 {% endblock contenido %}

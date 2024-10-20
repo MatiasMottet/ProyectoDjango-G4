@@ -30,6 +30,10 @@ body {
 
 a {
 	text-decoration: none;
+    color: var(--text-color);
+}
+a:hover {
+    color: var(--main-color);
 }
 .link {
     color: #000;
@@ -47,17 +51,14 @@ a {
 
 p {
 	font-size: 1.7rem;
+    font-family: "Poppins", sans-serif;
+	justify-content: flex-start;
 }
 
 .section {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
 }
-
-strong {
-	margin: 0;
-}
-
 
 .card-container {
     display: grid;
@@ -77,24 +78,9 @@ strong {
 	border-radius: 8px;
 }
 
-.delete-button {
-    background-color: rgb(238, 51, 51);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-    padding: 5px 10px;
-    border-radius: 3px;
-}
-
 img {
 	margin: 0 15%;
 	border-radius: 8px;
 	width: 200px;
 	height: 200px;
-}
-
-p{
-	font-family: "Poppins", sans-serif;
-	justify-content: flex-start;
 }
