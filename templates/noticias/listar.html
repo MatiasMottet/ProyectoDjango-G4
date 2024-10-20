@@ -19,29 +19,23 @@
 <div class="card-container">
 	{% for noti in noticias %}
     <div class="card">
-        <img src="{{noti.imagen.url}}" />
-        <p>
-        <a href="{% url 'noticias:detalle' noti.pk %}">
-           TITULO: {{noti.titulo}}
-        </a>
-    </p>
-        <p>FECHA: {{noti.fecha}}</p>
-        <p>CATEGORIA: {{noti.categoria_noticia}}</p>
-        <p>CUERPO:{{noti.cuerpo}}</p>
-        <p>
-            <a href="{% url 'usuarios:perfil' noti.usuario.pk %}">AUTOR: {{noti.usuario}}</a>
-        </p>
+        <img src="{{noti.imagen.url}}"/>
+        <p><span>TITULO:</span>&nbsp;<a href="{% url 'noticias:detalle' noti.pk %}">{{ noti.titulo }}</a></p>
+        <p><span>FECHA:</span>&nbsp;{{noti.fecha}}</p>
+        <p><span>CATEGORIA:</span>&nbsp;{{noti.categoria_noticia}}</p>
+        <p><span>CUERPO:</span>&nbsp;{{noti.cuerpo}}</p>
+        <p><span>AUTOR:</span>&nbsp;<a href="{% url 'usuarios:perfil' noti.usuario.pk %}"> {{noti.usuario}}</a></p>
 
         {% if user.is_authenticated and user == noti.usuario %}
             <form action="{% url 'noticias:eliminar' noti.pk %}" method="post" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta noticia?')">X</button>
+                <button type="submit" class="boton" onclick="return confirm('¿Estás seguro de que deseas eliminar esta noticia?')">X</button>
             </form>
         {% endif %}
         {% if user.is_authenticated %}
             <form action="{% url 'noticias:denunciar' noti.pk %}" method="post" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" class="delete-button" onclick="return confirm('¿Estás seguro de que deseas denunciar esta noticia?')">Denunciar</button>
+                <button type="submit" class="boton" onclick="return confirm('¿Estás seguro de que deseas denunciar esta noticia?')">Denunciar</button>
             </form>
         {% endif %}
     </div>
