@@ -4,13 +4,13 @@
 {% block title %}Enviar Denuncia{% endblock %}
 
 {% block contenido %}
-<div class="denuncia-container">
-    <h1>Enviar Denuncia sobre: {{ noticia.titulo }}</h1>
-    <form method="post">
+<div class="submenu">
+    <h1>Enviar Denuncia sobre:<span> {{ noticia.titulo }}</span></h1>
+    <form method="post" class="form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">Enviar Denuncia</button>
     </form>
-    <a href="{% url 'noticias:listar' %}">Volver a la lista de noticias</a>
+    <a href="{% url 'noticias:listar' %}" class="boton">Volver a la lista de noticias</a>
 </div>
 {% endblock contenido %}
